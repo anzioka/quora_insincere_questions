@@ -1,0 +1,7 @@
+pandas
+matplotlib
+keras
+numpy
+tqdm
+sklearn
+tensorflow>=1.5
