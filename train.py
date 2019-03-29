@@ -22,7 +22,7 @@ def train_and_evaluate(model, config, data):
 		model.load_weights(config['weights'])
 
 	print("Starting training...")
-	history = model.fit(data['X_train'], data['Y_train'], epochs = config['epochs'], initial_epoch=config['initial_epoch'], verbose=1, batch_size=config['batch_size'], callbacks = [checkpoint, reducelr], validation_split=0.1)
+	history = model.fit(data['X_train'], data['Y_train'], epochs = config['epochs'], initial_epoch=config['initial_epoch'], verbose=1, batch_size=config['batch_size'], callbacks = [checkpoint, reducelr, early_stop], validation_split=0.1)
 
 	print("Finished training")
 	
