@@ -15,6 +15,7 @@ dataset_params = 'data/info.json'
 def train_and_evaluate(model, config, data):
 	checkpoint = ModelCheckpoint(filepath=os.path.join(config['training_dir'], "{epoch:02d}-{val_acc:.2f}-{val_loss:.2f}.hdf5"))
 	reducelr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.001)
+	early_stop = EarlyStopping(patience=1)
 
 	# resume training
 	if config['restore'] is not None:
