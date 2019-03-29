@@ -4,7 +4,7 @@ import os
 from utils import *
 import models
 import importlib
-from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau
+from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
 from keras.models import load_model
 import matplotlib
 matplotlib.use('PS')
