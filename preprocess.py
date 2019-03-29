@@ -68,11 +68,11 @@ for word, i in tqdm(word_index.items()):
         embeddings[i] = np.random.uniform(-0.25, 0.25, embed_dim)
 
 # save data
-np.save(open(X_train_path, 'wb'), X_train)
-np.save(open(X_test_path, 'wb'), X_test)
-np.save(open(Y_train_path, 'wb'), Y_train)
-np.save(open(Y_test_path, 'wb'), Y_test)
-np.save(open(embeddings_path, 'wb'), embeddings)
+np.save(open(X_train_path, 'wb+'), X_train)
+np.save(open(X_test_path, 'wb+'), X_test)
+np.save(open(Y_train_path, 'wb+'), Y_train)
+np.save(open(Y_test_path, 'wb+'), Y_test)
+np.save(open(embeddings_path, 'wb+'), embeddings)
 
 info = {
 	'embed_dim' : embed_dim,

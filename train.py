@@ -4,7 +4,7 @@ import os
 from utils import *
 import models
 import importlib
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau
 from keras.models import load_model
 import matplotlib
 matplotlib.use('PS')
@@ -14,13 +14,14 @@ dataset_params = 'data/info.json'
 
 def train_and_evaluate(model, config, data):
 	checkpoint = ModelCheckpoint(filepath=os.path.join(config['training_dir'], "{epoch:02d}-{val_acc:.2f}-{val_loss:.2f}.hdf5"))
+	reducelr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.001)
 
 	# resume training
 	if config['restore'] is not None:
 		model.load_weights(config['weights'])
 
 	print("Starting training...")
-	history = model.fit(data['X_train'], data['Y_train'], epochs = config['epochs'], initial_epoch=config['initial_epoch'], verbose=1, batch_size=config['batch_size'], callbacks = [checkpoint], validation_split=0.1)
+	history = model.fit(data['X_train'], data['Y_train'], epochs = config['epochs'], initial_epoch=config['initial_epoch'], verbose=1, batch_size=config['batch_size'], callbacks = [checkpoint, reducelr], validation_split=0.1)
 
 	print("Finished training")
 	
